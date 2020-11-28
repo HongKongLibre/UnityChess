@@ -49,6 +49,10 @@ public class Piece : MonoBehaviour
         }
         return move_pattern;
     }
+    private void OnDisable()
+    {
+        Destroy(this.gameObject);
+    }
 
     private void OnDestroy()
     {

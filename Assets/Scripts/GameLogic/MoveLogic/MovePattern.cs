@@ -18,8 +18,25 @@ public abstract class MovePattern : IMovePattern
 
     public virtual void Move(Vector2Int new_position)
     {
+        UpdateDictionary(piece.GetBoardPosition(), new_position);
         piece.transform.localPosition = new Vector3(new_position.x, new_position.y);
         piece.MoveCount++;
+    }
+
+    protected void UpdateDictionary(Vector2Int old_position, Vector2Int new_position)
+    {
+        pieces.Remove(old_position);
+        RemovePieceAt(new_position);
+        pieces.Add(new_position, piece);
+    }
+
+    protected void RemovePieceAt(Vector2Int position)
+    {
+        if (pieces.ContainsKey(position))
+        {
+            pieces[position].gameObject.SetActive(false);
+            pieces.Remove(position);
+        }
     }
 
     public List<Vector2Int> GetPossibleMoves()

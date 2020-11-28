@@ -93,12 +93,14 @@ public class Pieces : MonoBehaviour
     {
         Vector2Int old_piece_position = current_chosen_piece.GetBoardPosition();
         current_chosen_piece_move_pattern.Move(new_board_position);
-        UpdateDictionary(old_piece_position, new_board_position);
         ChangeTurn();
         OnMovingPiece?.Invoke(this, new MovingPieceEventArgs
         {
             old_position = old_piece_position,
-            new_position = new_board_position
+            new_position = new_board_position,
+            type = current_chosen_piece.Type,
+            team = current_chosen_piece.Team
+            
         });
 
     }
@@ -112,18 +114,6 @@ public class Pieces : MonoBehaviour
             pieces.Add(temp_piece_object.GetBoardPosition(),
                        temp_piece_object);
         }
-    }
-
-    private void UpdateDictionary(Vector2Int old, Vector2Int nee)
-    {
-        var temp_piece_object = pieces[old];
-        pieces.Remove(old);
-        if (pieces.ContainsKey(nee))
-        {
-            Destroy(pieces[nee].gameObject);
-            pieces.Remove(nee);
-        }
-        pieces.Add(nee, temp_piece_object);
     }
     
     private void ChangeTurn()
