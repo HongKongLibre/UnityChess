@@ -20,11 +20,14 @@ public class PossibleMovesOfPiece : MonoBehaviour
         pieces_object.GetComponent<Pieces>().OnUnchoosingPiece += HandleUnchoosingPiece;
     }
 
-    private void OnDisable()
-    {
-        pieces_object.GetComponent<Pieces>().OnChoosingPiece -= HandleChoosingPiece;
-        pieces_object.GetComponent<Pieces>().OnUnchoosingPiece -= HandleUnchoosingPiece;
-    }
+    //private void OnDisable()
+    //{
+    //    if (pieces_object != null)
+    //    {
+    //        pieces_object.GetComponent<Pieces>().OnChoosingPiece -= HandleChoosingPiece;
+    //        pieces_object.GetComponent<Pieces>().OnUnchoosingPiece -= HandleUnchoosingPiece;
+    //    }
+    //}
 
     private void HandleUnchoosingPiece(object sender, EventArgs e)
     {

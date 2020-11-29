@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 
-public class MovePatternUtils
+public static class MovePatternUtils
 {
 
-    public Vector2Int MultiplyVectorsByElements(Vector2Int left_vector, Vector2Int right_vector)
+    public static Vector2Int MultiplyVectorsByElements(Vector2Int left_vector, Vector2Int right_vector)
     {
         return new Vector2Int(left_vector.x * right_vector.x, left_vector.y * right_vector.x);
     }
 
-    public List<Vector2Int> MultiplyVectorsByElements(List<Vector2Int> left_vectors, List<Vector2Int> right_vectors)
+    public static List<Vector2Int> MultiplyVectorsByElements(List<Vector2Int> left_vectors, List<Vector2Int> right_vectors)
     {
         var vector_list = new List<Vector2Int>();
         foreach (Vector2Int left_vector in left_vectors)
@@ -22,7 +22,7 @@ public class MovePatternUtils
                 vector_list.Add(MultiplyVectorsByElements(left_vector, right_vector));
         return vector_list;
     }
-    public bool IsPositionOnBoard(Vector2Int position)
+    public static bool IsPositionOnBoard(Vector2Int position)
     {
         Vector2Int lowest_board_point = new Vector2Int(1, 1);
         Vector2Int highest_board_point = new Vector2Int(8, 8);
@@ -31,7 +31,7 @@ public class MovePatternUtils
     }
 
 
-    public bool IsLineEmpty(Dictionary<Vector2Int, Piece> board, Vector2Int start, Vector2Int end)
+    public static bool IsLineEmpty(Dictionary<Vector2Int, Piece> board, Vector2Int start, Vector2Int end)
     {
         int x_difference = end[0] - start[0];
         int y_difference = end[1] - start[1];
@@ -54,22 +54,27 @@ public class MovePatternUtils
 
     }
 
-    public int ZeroToOneValue(int value)
+    public static bool HasPieceMoved(Piece piece)
+    {
+        return MoveHistory.Instance.HasPieceMoved(piece);
+    }
+
+    public static int ZeroToOneValue(int value)
     {
         var new_value = value == 0 ? 0 : Mathf.Abs(value) / value;
         return new_value;
     }
 
-    public Vector2Int DirectionVector(Vector2Int vector)
+    public static Vector2Int DirectionVector(Vector2Int vector)
     {
         return new Vector2Int(ZeroToOneValue(vector.x), ZeroToOneValue(vector.y));
     }
-    public void IncreaseVectorByOne(ref Vector2Int vector)
+    public static void IncreaseVectorByOne(ref Vector2Int vector)
     {
         vector += DirectionVector(vector);
 
     }
-    public void MirrorVectors(ref List<Vector2Int> vectors)
+    public static void MirrorVectors(ref List<Vector2Int> vectors)
     {
         var mirrored_vectors = new List<Vector2Int>();
         foreach (Vector2Int vector in vectors)

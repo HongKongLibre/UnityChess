@@ -11,16 +11,15 @@ public abstract class MovePattern : IMovePattern
     }
 
     protected List<Vector2Int> moving_vectors;
-    protected MovePatternUtils Utils = new MovePatternUtils();
     protected Dictionary<Vector2Int, Piece> pieces;
     protected Piece piece;
     protected Vector2Int piece_position => piece.GetBoardPosition();
+
 
     public virtual void Move(Vector2Int new_position)
     {
         UpdateDictionary(piece.GetBoardPosition(), new_position);
         piece.transform.localPosition = new Vector3(new_position.x, new_position.y);
-        piece.MoveCount++;
     }
 
     protected void UpdateDictionary(Vector2Int old_position, Vector2Int new_position)
@@ -73,7 +72,7 @@ public abstract class MovePattern : IMovePattern
 
     protected virtual bool IsPossibleToMoveToPosition(Vector2Int position)
     {
-        return (!pieces.ContainsKey(position) || HasEnemy(position)) && Utils.IsPositionOnBoard(position);
+        return (!pieces.ContainsKey(position) || HasEnemy(position)) && MovePatternUtils.IsPositionOnBoard(position);
 
     }
 

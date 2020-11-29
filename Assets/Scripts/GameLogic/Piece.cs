@@ -6,11 +6,9 @@ public class Piece : MonoBehaviour
 {
     [SerializeField] private Team team;
     [SerializeField] private PieceType type;
-    [SerializeField] private int move_count = 0;
 
     public Team Team { get { return team; } }
     public PieceType Type { get { return type; } }
-    public int MoveCount { get { return move_count; } set { move_count++; } }
 
     public Vector2Int GetBoardPosition()
     {

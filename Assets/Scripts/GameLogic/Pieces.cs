@@ -22,8 +22,7 @@ public class Pieces : MonoBehaviour
     {
         public Vector2Int old_position;
         public Vector2Int new_position;
-        public PieceType type;
-        public Team team;
+        public Piece piece;
     }
     public class ChoosingPieceEventArgs : EventArgs
     {
@@ -98,8 +97,7 @@ public class Pieces : MonoBehaviour
         {
             old_position = old_piece_position,
             new_position = new_board_position,
-            type = current_chosen_piece.Type,
-            team = current_chosen_piece.Team
+            piece = current_chosen_piece
             
         });
 
