@@ -67,7 +67,6 @@ public class Pawn : MovePattern, IMovePattern
                 if (Mathf.Abs((last_move.Item2 - last_move.Item1).y) == 2)
                     if (Mathf.Abs((last_move.Item2 - piece_position).x) == 1 && (last_move.Item2 - piece_position).y == 0)
                         return new List<Vector2Int>(){ (last_move.Item2 + last_move.Item1) / 2 };
-        Debug.Log("Done");
         return new List<Vector2Int>();
     }
 
