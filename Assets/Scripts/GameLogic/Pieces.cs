@@ -8,11 +8,12 @@ public class Pieces : MonoBehaviour
                          new Dictionary<Vector2Int, Piece>();
 
     [SerializeField] private GameObject pieces_prefab_object;
-    [SerializeField] private Team current_turn = Team.white;
+    [SerializeField] private static Team current_turn = Team.white;
 
     [SerializeField] private Piece current_chosen_piece;
     [SerializeField] private IMovePattern current_chosen_piece_move_pattern => current_chosen_piece.GetMovePattern(pieces);
     [SerializeField] private List<Vector2Int> current_piece_possible_moves;
+    [SerializeField] private static bool game_is_on = true;
 
     public EventHandler<ChoosingPieceEventArgs> OnChoosingPiece;
     public EventHandler OnUnchoosingPiece;
@@ -37,14 +38,17 @@ public class Pieces : MonoBehaviour
     
     public void Click(Vector2Int board_position)
     {
-        if (current_chosen_piece == null)
+        if (game_is_on)
         {
-            TryToGetPiece(board_position);
-        }
-        else
-        {
-            TryToMakeAMove(board_position);
-            ClearCurrentChosenPiece();
+            if (current_chosen_piece == null)
+            {
+                TryToGetPiece(board_position);
+            }
+            else
+            {
+                TryToMakeAMove(board_position);
+                ClearCurrentChosenPiece();
+            }
         }
     }
 
@@ -117,6 +121,11 @@ public class Pieces : MonoBehaviour
     private void ChangeTurn()
     {
         current_turn = current_turn == Team.white ? (Team.black) : (Team.white);
+    }
+    public static void EndGame()
+    {
+        game_is_on = false;
+        FindObjectOfType<EndScreenScript>().ShowEndScreen(current_turn);
     }
 
 }

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,14 +9,13 @@ public class HistoryUI : MonoBehaviour
     [SerializeField] private GameObject history_textbox_prefab;
     [SerializeField] private float distance_between_textboxes_x;
     [SerializeField] private float distance_between_textboxes_y;
+    private int rows_in_window;
 
-    public void Hello()
-    {
-        Debug.Log("hello");
-    }
     private void Start()
     {
         FindObjectOfType<Pieces>().OnMovingPiece += HandleMovingPiece;
+        rows_in_window = (int)((GetComponent<RectTransform>().rect.height - history_textbox_prefab.GetComponent<RectTransform>().rect.height - history_textbox_prefab.transform.localPosition.y) / distance_between_textboxes_y);
+
     }
 
     private void HandleMovingPiece(object sender, Pieces.MovingPieceEventArgs e)
@@ -35,15 +33,19 @@ public class HistoryUI : MonoBehaviour
             CreateTurnNumberTextBox();
             var new_position = prefab_position + new Vector3(distance_between_textboxes_x, -distance_between_textboxes_y * turn_number, 0);
             CreateNewTextBox(new_position, GetHistoryStringFromVectors(move));
-            if (turn_number > 9)
-                GetComponent<RectTransform>().offsetMin = new Vector2(0, -50f * (turn_number - 9));
-
+            GetComponent<RectTransform>().anchoredPosition = new Vector2(0, GetComponent<RectTransform>().rect.height/2);
+            if (turn_number > rows_in_window)
+            {
+                GetComponent<RectTransform>().offsetMin += new Vector2(0, -distance_between_textboxes_y);
+            }
         }
         else
         {
             var new_position = prefab_position + new Vector3(distance_between_textboxes_x * 2, -distance_between_textboxes_y * turn_number, 0);
             CreateNewTextBox(new_position, GetHistoryStringFromVectors(move));
+            GetComponent<RectTransform>().anchoredPosition = new Vector2(0, GetComponent<RectTransform>().rect.height/2);
         }
+
 
     }
     

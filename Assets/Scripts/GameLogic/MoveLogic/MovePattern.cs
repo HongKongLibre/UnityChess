@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 public abstract class MovePattern : IMovePattern
 {
@@ -13,8 +12,8 @@ public abstract class MovePattern : IMovePattern
     protected List<Vector2Int> moving_vectors;
     protected Dictionary<Vector2Int, Piece> pieces;
     protected Piece piece;
-    protected Vector2Int piece_position => piece.GetBoardPosition();
 
+    protected Vector2Int piece_position => piece.GetBoardPosition();
 
     public virtual void Move(Vector2Int new_position)
     {

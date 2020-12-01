@@ -49,14 +49,11 @@ public class Piece : MonoBehaviour
     }
     private void OnDisable()
     {
+        if (this.type == PieceType.king)
+            Pieces.EndGame();
         Destroy(this.gameObject);
     }
 
-    private void OnDestroy()
-    {
-        if (type == PieceType.king)
-            Debug.Log($"{team.ToString()[0].ToString().ToUpper() + team.ToString().Substring(1)} King has fallen");
-    }
 }
 public enum Team{
     white,

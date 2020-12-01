@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 
-//[RequireComponent(typeof(Pieces))]
 public class UserController : MonoBehaviour
 {
-    [SerializeField] private bool game_is_on = true;
     [SerializeField] private GameObject pieces_object;
     [SerializeField] private Camera camera;
     [SerializeField] private Pieces pieces;
@@ -17,12 +15,9 @@ public class UserController : MonoBehaviour
 
     private void Update()
     {
-        if (game_is_on)
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                pieces.Click(TransformMousePositionInBoardPosition(Input.mousePosition));
-            }
+            pieces.Click(TransformMousePositionInBoardPosition(Input.mousePosition));
         }
 
     }

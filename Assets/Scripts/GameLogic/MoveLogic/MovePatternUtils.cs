@@ -1,27 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 
 public static class MovePatternUtils
 {
-
-    public static Vector2Int MultiplyVectorsByElements(Vector2Int left_vector, Vector2Int right_vector)
-    {
-        return new Vector2Int(left_vector.x * right_vector.x, left_vector.y * right_vector.x);
-    }
-
-    public static List<Vector2Int> MultiplyVectorsByElements(List<Vector2Int> left_vectors, List<Vector2Int> right_vectors)
-    {
-        var vector_list = new List<Vector2Int>();
-        foreach (Vector2Int left_vector in left_vectors)
-            foreach (Vector2Int right_vector in right_vectors)
-                vector_list.Add(MultiplyVectorsByElements(left_vector, right_vector));
-        return vector_list;
-    }
     public static bool IsPositionOnBoard(Vector2Int position)
     {
         Vector2Int lowest_board_point = new Vector2Int(1, 1);
@@ -59,7 +41,7 @@ public static class MovePatternUtils
         return MoveHistory.Instance.HasPieceMoved(piece);
     }
 
-    public static int ZeroToOneValue(int value)
+    public static int GetDirection(int value)
     {
         var new_value = value == 0 ? 0 : Mathf.Abs(value) / value;
         return new_value;
@@ -67,13 +49,9 @@ public static class MovePatternUtils
 
     public static Vector2Int DirectionVector(Vector2Int vector)
     {
-        return new Vector2Int(ZeroToOneValue(vector.x), ZeroToOneValue(vector.y));
+        return new Vector2Int(GetDirection(vector.x), GetDirection(vector.y));
     }
-    public static void IncreaseVectorByOne(ref Vector2Int vector)
-    {
-        vector += DirectionVector(vector);
 
-    }
     public static void MirrorVectors(ref List<Vector2Int> vectors)
     {
         var mirrored_vectors = new List<Vector2Int>();
