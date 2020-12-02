@@ -12,3 +12,5 @@ https://github.com/HongKongLibre/UnityChess/blob/main/Assets/Scripts/History/Mov
 https://github.com/HongKongLibre/UnityChess/blob/main/Assets/Scripts/PossibleMovesOfPiece.cs
 
 https://github.com/HongKongLibre/UnityChess/blob/main/Assets/Scripts/GameLogic/MoveLogic/MovePatternUtils.cs
+
+Игра работает, но отсутсвуют реализация некоторых правил оргинальных шахмат и UI.
